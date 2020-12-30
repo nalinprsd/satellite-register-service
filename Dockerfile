@@ -4,4 +4,4 @@ EXPOSE 8080
 
 ADD target/satellite-register-service.jar satellite-register-service.jar
 
-ENTRYPOINT ["java", "-jar", "satellite-register-service.jar"]dd
+ENTRYPOINT ["java", "-jar", "satellite-register-service.jar"]
