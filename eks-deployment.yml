@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: DEPLOYMENT_NAME
+  labels:
+    project: spacex-starlink
+spec:
+  selector:
+    matchLabels:
+      app: APPNAME
+  replicas: 1 
+  template: 
+    metadata:
+      labels:
+        app: APPNAME
+    spec:
+      imagePullSecrets:
+      - name: aws-ecr-reg    
+      containers:
+      - name: APPNAME
+        image: CONTAINER_IMAGE
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          initialDelaySeconds: 5          
+          timeoutSeconds: 1          
+          httpGet:            
+            path: /actuator/health            
+            port: 8080
+        livenessProbe:          
+          initialDelaySeconds: 5          
+          timeoutSeconds: 1          
+          httpGet:            
+            path: /actuator/health            
+            port: 8080
